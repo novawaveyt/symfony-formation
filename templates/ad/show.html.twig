@@ -1,8 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-    {{ad.title}}
-{% endblock %}
+{% block title %} {{ ad.title }} {% endblock %}
 
 {% block body %}
 
@@ -53,18 +51,22 @@
         </div>
 
         <div class="col">
+            {% set a = ad.author %}
+            {% set url= path('user_show', {'slug': a.slug}) %}
             <div class="row">
-                <div class="col-4">
-                    <img src="http://placehold.it/64x64" alt="Avatar de Joseph">
+                <div class="col-3">
+                    <a href="{{ url }}" class="href">
+                        <img src="{{ a.picture }}" class="avatar avatar-medium" alt="Avatar de {{ a.fullName }}">
+                    </a>
                 </div>
                 <div class="col">
-                    <h3>Joseph Dupont</h3>
-                    <span class="badge badge-primary">3 annonces</span>
+                    <a href="{{ url }}" class="href">
+                        <h3>{{ a.fullName }}</h3>
+                        <span class="badge badge-primary mb-3">{{ a.ads | length }} annonces</span>
+                    </a>
                 </div>
             </div>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima odit doloremque aperiam debitis numquam, quasi excepturi sit natus quos molestiae!</p>
-            <p>Corrupti cupiditate nemo illo ad harum ipsum unde totam labore aut asperiores amet eaque, dicta nostrum assumenda obcaecati sapiente deserunt.</p>
-            <p>Consequuntur facere sint quasi perferendis tempore nihil esse rerum soluta, animi sed dolore similique est provident aut culpa nesciunt odit.</p>
+            {{ a.description | raw }}
         </div>
     </div>
 </div>
